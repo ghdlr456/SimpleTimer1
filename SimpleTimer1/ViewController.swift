@@ -19,7 +19,9 @@ class ViewController: UIViewController {
 
     @IBAction func timerstart(_ sender: Any) {
         if timerSwith.isOn == true {
-            myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block:{(myTimer) in self.updateTime()
+            })
+            
         } else {
             myTimer.invalidate()
         }
