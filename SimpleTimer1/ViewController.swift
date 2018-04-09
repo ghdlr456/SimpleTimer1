@@ -1,25 +1,29 @@
-//
-//  ViewController.swift
-//  SimpleTimer1
-//
-//  Created by D7702_09 on 2018. 4. 9..
-//  Copyright © 2018년 lse. All rights reserved.
-//
 
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timerSwith: UISwitch!
+    var myTimer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        timerSwith.setOn(false, animated: true)
+    }
+    @objc func updateTime() {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss a"
+        timeLabel.text = formatter.string(from: date)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func timerstart(_ sender: Any) {
+        if timerSwith.isOn == true {
+            myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        } else {
+            myTimer.invalidate()
+        }
     }
-
-
+    
 }
 
